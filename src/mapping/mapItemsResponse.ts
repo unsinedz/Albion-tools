@@ -78,7 +78,7 @@ function mapBaseItem(item: UnknownItem): Omit<Item, "type"> {
     id: item["@uniquename"],
     craftingRequirements:
       typeof item.craftingrequirements === "undefined"
-        ? undefined
+        ? []
         : Array.isArray(item.craftingrequirements)
         ? item.craftingrequirements.map(mapCraftingRequirements)
         : [mapCraftingRequirements(item.craftingrequirements)],

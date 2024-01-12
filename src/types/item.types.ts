@@ -21,7 +21,7 @@ export interface Weapon extends BaseItem, CraftableItem {
 }
 
 interface CraftableItem {
-  craftingRequirements?: CraftingRequirements[];
+  craftingRequirements: CraftingRequirements[];
 }
 
 interface CraftingRequirements {
