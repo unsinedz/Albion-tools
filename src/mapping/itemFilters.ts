@@ -23,17 +23,29 @@ export function notArtefact(item: Item): boolean {
 }
 
 export function tiers(...tiers: number[]): (item: Item) => boolean {
-  return (item) => tiers.includes(item.tier);
+  const set = new Set(tiers);
+  return (item) => set.has(item.tier);
 }
 
 export function categories(...categories: string[]): (item: Item) => boolean {
-  return (item) => categories.includes(item.category);
+  const set = new Set(categories);
+  return (item) => set.has(item.category);
+}
+
+export function tiersForSubCategory(
+  subCategory: string,
+  tier1: number,
+  ...tiers: number[]
+): (item: Item) => boolean {
+  const tiersSet = new Set([...tiers, tier1]);
+  return (item) => item.subCategory !== subCategory || tiersSet.has(item.tier);
 }
 
 export function subCategories(
   ...subCategories: string[]
 ): (item: Item) => boolean {
-  return (item) => subCategories.includes(item.subCategory);
+  const set = new Set(subCategories);
+  return (item) => set.has(item.subCategory);
 }
 
 export function doesNotRequireArtefact(item: Item) {
@@ -42,9 +54,10 @@ export function doesNotRequireArtefact(item: Item) {
   }
 
   return (
-    item.craftingRequirements.findIndex((x) =>
-      // there is a recipe without artifacts
-      x.craftingResources.findIndex((z) => isArtefactResource(z.id)) === -1
+    item.craftingRequirements.findIndex(
+      (x) =>
+        // there is a recipe without artifacts
+        x.craftingResources.findIndex((z) => isArtefactResource(z.id)) === -1
     ) !== -1
   );
 }

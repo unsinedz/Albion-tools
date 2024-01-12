@@ -20,13 +20,17 @@ import {
   notVanity,
   subCategories,
   tiers,
+  tiersForSubCategory,
 } from "./itemFilters";
 
 const CommonFilter = matchAll(
   notVanity,
   notArtefact,
-  tiers(2, 3, 4, 5, 6),
-  subCategories("sword", "leather_helmet", "leather_shoes", "arcanestaff", "froststaff", "shield", "book"),
+  tiers(2, 3, 4),
+  subCategories("sword", "leather_helmet", "leather_shoes", "firestaff", "arcanestaff", "froststaff", "shield", "book"),
+  tiersForSubCategory("firestaff", 2, 3),
+  tiersForSubCategory("shield", 3),
+  tiersForSubCategory("book", 3),
   doesNotRequireArtefact,
 );
 
