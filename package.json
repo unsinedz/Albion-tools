@@ -1,0 +1,17 @@
+{
+  "name": "albion-recipies-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node lib/index.js",
+    "watch": "tsc -b -w --listEmittedFiles"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}
