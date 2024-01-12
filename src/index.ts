@@ -1,8 +1,9 @@
 import type { ItemsResponse } from "./types";
 
-import { writeFileAsync } from "./utils/asyncFs";
 import measure from "./utils/measure";
-import mapItemsResponse from "./mapItemsResponse";
+import mapItemsResponse from "./recipies/mapItemsResponse";
+
+import { writeFile } from "fs";
 
 const ItemsUrl =
   "https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/items.json";
@@ -35,4 +36,8 @@ async function fetchData<T>(url: string): Promise<T> {
   }
 
   return response.json();
+}
+
+export function writeFileAsync(fileName: string, content: string): Promise<void> {
+  return new Promise((res) => writeFile(fileName, content, () => res()));
 }

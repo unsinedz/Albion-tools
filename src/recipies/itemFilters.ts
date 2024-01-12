@@ -1,4 +1,4 @@
-import { Item } from "./types";
+import { Item } from "../types";
 
 export function matchAll<T>(
   ...predicates: ((x: T) => boolean)[]

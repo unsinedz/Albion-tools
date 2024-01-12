@@ -11,7 +11,7 @@ import {
   isEquipmentItem,
   isResourceItem,
   isWeaponItem,
-} from "./types";
+} from "../types";
 
 import {
   doesNotRequireArtefact,
