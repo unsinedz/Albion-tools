@@ -14,6 +14,7 @@ import {
 } from "../types";
 
 import {
+  doesNotRequireArtefact,
   matchAll,
   notArtefact,
   notVanity,
@@ -25,7 +26,8 @@ const CommonFilter = matchAll(
   notVanity,
   notArtefact,
   tiers(2, 3, 4, 5, 6),
-  subCategories("sword", "leather_helmet", "leather_shoes", "arcanestaff", "froststaff", "shield", "book")
+  subCategories("sword", "leather_helmet", "leather_shoes", "arcanestaff", "froststaff", "shield", "book"),
+  doesNotRequireArtefact,
 );
 
 export default function (itemsResponse: ItemsResponse) {

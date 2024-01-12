@@ -35,3 +35,16 @@ export function subCategories(
 ): (item: Item) => boolean {
   return (item) => subCategories.includes(item.subCategory);
 }
+
+export function doesNotRequireArtefact(item: Item) {
+  function isArtefactResource(id: string) {
+    return id.includes("ARTEFACT");
+  }
+
+  return (
+    item.craftingRequirements.findIndex((x) =>
+      // there is a recipe without artifacts
+      x.craftingResources.findIndex((z) => isArtefactResource(z.id)) === -1
+    ) !== -1
+  );
+}
