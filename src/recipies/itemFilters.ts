@@ -15,7 +15,7 @@ export function matchAll<T>(
 }
 
 export function notVanity(item: Item) {
-  return !item.id.includes("UNIQUE_VANITY");
+  return !item.id.includes("UNIQUE_");
 }
 
 export function notArtefact(item: Item): boolean {
