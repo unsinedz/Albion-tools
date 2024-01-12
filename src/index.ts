@@ -2,7 +2,7 @@ import type { ItemsResponse } from "./types";
 
 import { writeFileAsync } from "./utils/asyncFs";
 import measure from "./utils/measure";
-import mapItemsResponse from "./mapping/mapItemsResponse";
+import mapItemsResponse from "./mapItemsResponse";
 
 const ItemsUrl =
   "https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/items.json";
