@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node lib/index.js",
+    "start": "node lib/dev/local.js",
     "watch": "tsc -b -w --listEmittedFiles"
   },
   "keywords": [],

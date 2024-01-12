@@ -1,7 +1,7 @@
-import type { ItemsResponse } from "./recipies/recipies.types";
+import type { ItemsResponse } from "../src/recipies/recipies.types";
 
-import measure from "./utils/measure";
-import mapItemsResponse from "./recipies/mapItemsResponse";
+import measure from "../src/utils/measure";
+import mapItemsResponse from "../src/recipies/mapItemsResponse";
 
 import { writeFile } from "fs";
 
