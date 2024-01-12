@@ -40,7 +40,7 @@ export function isWeaponItem(item: UnknownItem): item is WeaponItem {
 }
 
 interface CraftableItem {
-  craftingrequirements?: CraftingRequirements;
+  craftingrequirements?: CraftingRequirements | CraftingRequirements[];
 }
 
 interface CraftingRequirements {

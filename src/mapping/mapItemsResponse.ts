@@ -13,14 +13,38 @@ import {
   isWeaponItem,
 } from "../types";
 
+import {
+  matchAll,
+  notArtefact,
+  notVanity,
+  subCategories,
+  tiers,
+} from "./itemFilters";
+
+const CommonFilter = matchAll(
+  notVanity,
+  notArtefact,
+  tiers(2, 3, 4, 5, 6),
+  subCategories("sword", "leather_helmet", "leather_shoes", "arcanestaff", "froststaff", "shield", "book")
+);
+
 export default function (itemsResponse: ItemsResponse) {
   const {
     items: { equipmentitem, simpleitem, weapon: weaponItem },
   } = itemsResponse;
 
-  const equipment = equipmentitem.filter(isEquipmentItem).map(mapEquipmentItem);
-  const resource = simpleitem.filter(isResourceItem).map(mapResourceItem);
-  const weapon = weaponItem.filter(isWeaponItem).map(mapWeaponItem);
+  const equipment = equipmentitem
+    .filter(CommonFilter)
+    .filter(isEquipmentItem)
+    .map(mapEquipmentItem);
+  const resource = simpleitem
+    .filter(CommonFilter)
+    .filter(isResourceItem)
+    .map(mapResourceItem);
+  const weapon = weaponItem
+    .filter(CommonFilter)
+    .filter(isWeaponItem)
+    .map(mapWeaponItem);
   return { equipment, resource, weapon };
 }
 
@@ -55,13 +79,15 @@ function mapBaseItem(item: UnknownItem): Omit<Item, "type"> {
     craftingRequirements:
       typeof item.craftingrequirements === "undefined"
         ? undefined
-        : parseCraftingRequirements(item.craftingrequirements),
+        : Array.isArray(item.craftingrequirements)
+        ? item.craftingrequirements.map(mapCraftingRequirements)
+        : [mapCraftingRequirements(item.craftingrequirements)],
   };
 }
 
-function parseCraftingRequirements(
-  requirements: NonNullable<UnknownItem["craftingrequirements"]>
-): Item["craftingRequirements"] {
+function mapCraftingRequirements(
+  requirements: ArrayItem<NonNullable<UnknownItem["craftingrequirements"]>>
+): ArrayItem<Item["craftingRequirements"]> {
   return {
     focus: requirements["@craftingfocus"]
       ? parseInt(requirements["@craftingfocus"])
@@ -70,16 +96,18 @@ function parseCraftingRequirements(
     craftingResources: !requirements.craftresource
       ? []
       : Array.isArray(requirements.craftresource)
-      ? requirements.craftresource.map(parseCraftingResource)
-      : [parseCraftingResource(requirements.craftresource)],
+      ? requirements.craftresource.map(mapCraftingResource)
+      : [mapCraftingResource(requirements.craftresource)],
   };
 }
 
-function parseCraftingResource(
+function mapCraftingResource(
   resource: ArrayItem<
-    NonNullable<UnknownItem["craftingrequirements"]>["craftresource"]
+    ArrayItem<NonNullable<UnknownItem["craftingrequirements"]>>["craftresource"]
   >
-): ArrayItem<NonNullable<Item["craftingRequirements"]>["craftingResources"]> {
+): ArrayItem<
+  ArrayItem<NonNullable<Item["craftingRequirements"]>>["craftingResources"]
+> {
   return {
     id: resource["@uniquename"],
     count: parseInt(resource["@count"]),
