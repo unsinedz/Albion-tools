@@ -1,4 +1,4 @@
-import type { ItemsResponse } from "./types";
+import type { ItemsResponse } from "./recipies/recipies.types";
 
 import measure from "./utils/measure";
 import mapItemsResponse from "./recipies/mapItemsResponse";

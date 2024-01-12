@@ -1,17 +1,14 @@
+import type { Equipment, Item, Resource, Weapon } from "../types";
 import {
-  type Equipment,
   type EquipmentItem,
-  type Item,
   type ItemsResponse,
-  type Resource,
   type ResourceItem,
   type UnknownItem,
-  type Weapon,
   type WeaponItem,
   isEquipmentItem,
   isResourceItem,
   isWeaponItem,
-} from "../types";
+} from "./recipies.types";
 
 import {
   doesNotRequireArtefact,
@@ -27,11 +24,20 @@ const CommonFilter = matchAll(
   notVanity,
   notArtefact,
   tiers(2, 3, 4),
-  subCategories("sword", "leather_helmet", "leather_shoes", "firestaff", "arcanestaff", "froststaff", "shield", "book"),
+  subCategories(
+    "sword",
+    "leather_helmet",
+    "leather_shoes",
+    "firestaff",
+    "arcanestaff",
+    "froststaff",
+    "shield",
+    "book"
+  ),
   tiersForSubCategory("firestaff", 2, 3),
   tiersForSubCategory("shield", 3),
   tiersForSubCategory("book", 3),
-  doesNotRequireArtefact,
+  doesNotRequireArtefact
 );
 
 export default function (itemsResponse: ItemsResponse) {
