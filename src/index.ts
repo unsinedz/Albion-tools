@@ -1,7 +1,7 @@
 import type { ItemsResponse } from "./types";
 
-import { writeFileAsync } from "./asyncFs";
-import measure from "./measure";
+import { writeFileAsync } from "./utils/asyncFs";
+import measure from "./utils/measure";
 import mapItemsResponse from "./mapping/mapItemsResponse";
 
 const ItemsUrl =
