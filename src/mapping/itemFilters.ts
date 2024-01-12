@@ -1,4 +1,4 @@
-import { UnknownItem } from "../types";
+import { Item } from "../types";
 
 export function matchAll<T>(
   ...predicates: ((x: T) => boolean)[]
@@ -14,27 +14,24 @@ export function matchAll<T>(
   };
 }
 
-export function notVanity(item: UnknownItem) {
-  return !item["@uniquename"].includes("UNIQUE_VANITY");
+export function notVanity(item: Item) {
+  return !item.id.includes("UNIQUE_VANITY");
 }
 
-export function notArtefact(item: UnknownItem): boolean {
-  return item["@shopcategory"] !== "artefacts";
+export function notArtefact(item: Item): boolean {
+  return item.category !== "artefacts";
 }
 
-export function tiers(...tiers: number[]): (item: UnknownItem) => boolean {
-  return (item) =>
-    tiers.findIndex((x) => item["@tier"] === x.toString()) !== -1;
+export function tiers(...tiers: number[]): (item: Item) => boolean {
+  return (item) => tiers.includes(item.tier);
 }
 
-export function categories(
-  ...categories: string[]
-): (item: UnknownItem) => boolean {
-  return (item) => categories.includes(item["@shopcategory"]);
+export function categories(...categories: string[]): (item: Item) => boolean {
+  return (item) => categories.includes(item.category);
 }
 
 export function subCategories(
   ...subCategories: string[]
-): (item: UnknownItem) => boolean {
-  return (item) => subCategories.includes(item["@shopsubcategory1"]);
+): (item: Item) => boolean {
+  return (item) => subCategories.includes(item.subCategory);
 }

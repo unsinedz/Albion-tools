@@ -13,14 +13,15 @@ async function main() {
 
   console.log(`Fetching items data`);
 
-  const { data, elapsedSeconds } = await measure(() =>
-    fetchData<ItemsResponse>(ItemsUrl)
-  );
+  const { data, elapsedSeconds } = await measure(async () => {
+    const response = await fetchData<ItemsResponse>(ItemsUrl);
+    // await writeFileAsync("./response.json", JSON.stringify(response));
+    return mapItemsResponse(response);
+  });
 
-  console.log(`Time elapsed: ${elapsedSeconds}`);
+  console.log(`Time elapsed: ${elapsedSeconds} seconds`);
 
-  const items = mapItemsResponse(data);
-  await writeFileAsync("./test.json", JSON.stringify(items));
+  await writeFileAsync("./test.json", JSON.stringify(data));
 }
 
 void main();

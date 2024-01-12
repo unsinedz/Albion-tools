@@ -34,17 +34,17 @@ export default function (itemsResponse: ItemsResponse) {
   } = itemsResponse;
 
   const equipment = equipmentitem
-    .filter(CommonFilter)
     .filter(isEquipmentItem)
-    .map(mapEquipmentItem);
+    .map(mapEquipmentItem)
+    .filter(CommonFilter);
   const resource = simpleitem
-    .filter(CommonFilter)
     .filter(isResourceItem)
-    .map(mapResourceItem);
+    .map(mapResourceItem)
+    .filter(CommonFilter);
   const weapon = weaponItem
-    .filter(CommonFilter)
     .filter(isWeaponItem)
-    .map(mapWeaponItem);
+    .map(mapWeaponItem)
+    .filter(CommonFilter);
   return { equipment, resource, weapon };
 }
 
