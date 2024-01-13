@@ -22,6 +22,10 @@ export function notArtefact(item: Item): boolean {
   return item.category !== "artefacts";
 }
 
+export function notRoyal(item: Item) {
+  return !item.id.includes("ROYAL");
+}
+
 export function tiers(...tiers: number[]): (item: Item) => boolean {
   const set = new Set(tiers);
   return (item) => set.has(item.tier);

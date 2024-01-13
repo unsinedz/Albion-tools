@@ -14,6 +14,7 @@ import {
   doesNotRequireArtefact,
   matchAll,
   notArtefact,
+  notRoyal,
   notVanity,
   subCategories,
   tiers,
@@ -23,6 +24,7 @@ import {
 const CommonFilter = matchAll(
   notVanity,
   notArtefact,
+  notRoyal,
   tiers(2, 3, 4),
   subCategories(
     "sword",
