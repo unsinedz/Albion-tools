@@ -3,6 +3,8 @@ import type { Item } from "../src/types";
 import extractItemIds from "../src/recipies/extractItemIds";
 import getItemRecipies from "../src/recipies/getItemRecipies";
 
+import getItemPrices from "../src/prices/getItemPrices";
+
 import { writeFile } from "fs";
 
 async function main() {
@@ -27,7 +29,12 @@ async function main() {
     "./recipies.json",
     JSON.stringify({ resource, weapon, equipment })
   );
-  await writeFileAsync("./test.json", JSON.stringify(inputFriendlyIds));
+
+  const locations = ["Lymhurst"];
+  const items = ["T4_MAIN_AXE"];
+  const prices = getItemPrices(items, locations);
+
+  await writeFileAsync("./test.json", JSON.stringify(prices));
 }
 
 void main();
