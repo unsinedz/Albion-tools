@@ -5,14 +5,10 @@ import getItemRecipies from "../src/recipies/getItemRecipies";
 
 import { writeFile } from "fs";
 
-const ItemsUrl =
-  "https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/items.json";
-
 async function main() {
   console.log(`Albion Online recipies parser`);
-  console.log(`Fetch URL: ${ItemsUrl}`);
 
-  const { equipment, resource, weapon } = await getItemRecipies(ItemsUrl);
+  const { equipment, resource, weapon } = await getItemRecipies();
 
   console.log(
     `Loaded recipies: ${equipment.length} equipment, ${resource.length} resources, ${weapon.length} weapon`
